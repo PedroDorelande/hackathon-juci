@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Detalhes - {{ pessoa.nome }}{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1><i class="fas fa-user-circle"></i> {{ pessoa.nome }}</h1>
+        <p class="subtitle">Cadastro #{{ pessoa.id }}</p>
+    </div>
+    <div class="header-actions">
+        <a href="/editar/{{ pessoa.id }}" class="btn btn-primary"><i class="fas fa-pen"></i> Editar</a>
+        <a href="/" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</a>
+    </div>
+</div>
+<div class="card detail-card">
+    <div class="detail-grid">
+        <div class="detail-item"><span class="detail-label"><i class="fas fa-hashtag"></i> ID</span><span class="detail-value">{{ pessoa.id }}</span></div>
+        <div class="detail-item"><span class="detail-label"><i class="fas fa-user"></i> Nome</span><span class="detail-value">{{ pessoa.nome }}</span></div>
+        <div class="detail-item"><span class="detail-label"><i class="fas fa-id-card"></i> CPF</span><span class="detail-value"><code>{{ pessoa.cpf }}</code></span></div>
+        <div class="detail-item"><span class="detail-label"><i class="fas fa-phone"></i> Telefone</span><span class="detail-value">{{ pessoa.telefone }}</span></div>
+        <div class="detail-item full-width"><span class="detail-label"><i class="fas fa-map-marker-alt"></i> Endereço</span><span class="detail-value">{{ pessoa.endereco }}{% if pessoa.cidade %}, {{ pessoa.cidade }}{% endif %}{% if pessoa.estado %} - {{ pessoa.estado }}{% endif %}{% if pessoa.cep %} | CEP: {{ pessoa.cep }}{% endif %}</span></div>
+        <div class="detail-item"><span class="detail-label"><i class="fas fa-calendar"></i> Cadastrado em</span><span class="detail-value">{{ pessoa.created_at }}</span></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - CadastroPro{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1><i class="fas fa-chart-bar"></i> Dashboard</h1>
+        <p class="subtitle">Visao geral dos cadastros</p>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-info">
+            <span class="stat-number">{{ total }}</span>
+            <span class="stat-label">Total de Cadastros</span>
+        </div>
+    </div>
+    <div class="stat-card accent">
+        <div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <div class="stat-info">
+            <span class="stat-number">{{ por_estado|length }}</span>
+            <span class="stat-label">Estados</span>
+        </div>
+    </div>
+    <div class="stat-card success">
+        <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+        <div class="stat-info">
+            <span class="stat-number">{{ recentes|length }}</span>
+            <span class="stat-label">Recentes</span>
+        </div>
+    </div>
+</div>
+
+{% if por_estado|length > 0 %}
+<div class="card" style="margin-bottom:1.5rem">
+    <h2 style="margin-bottom:1rem;font-size:1.1rem;color:var(--text-dim)"><i class="fas fa-chart-pie" style="color:var(--primary)"></i> Cadastros por Estado</h2>
+    <canvas id="chartEstados" height="120"></canvas>
+</div>
+{% endif %}
+
+<div class="card">
+    <h2 style="margin-bottom:1rem;font-size:1.1rem;color:var(--text-dim)"><i class="fas fa-clock" style="color:var(--accent)"></i> Cadastros Recentes</h2>
+    {% if recentes|length == 0 %}
+    <p style="color:var(--text-dim)">Nenhum cadastro ainda.</p>
+    {% else %}
+    <div class="table-wrapper" style="box-shadow:none;border:none">
+        <table>
+            <thead><tr><th>Nome</th><th>CPF</th><th>Cidade</th></tr></thead>
+            <tbody>
+            {% for p in recentes %}
+            <tr>
+                <td><strong>{{ p.nome }}</strong></td>
+                <td><code>{{ p.cpf }}</code></td>
+                <td>{{ p.cidade or '-' }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const labels = {{ estados_labels|safe }};
+const data = {{ estados_data|safe }};
+if (labels.length > 0) {
+    const ctx = document.getElementById('chartEstados').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Cadastros',
+                data: data,
+                backgroundColor: 'rgba(108,92,231,0.7)',
+                borderColor: 'rgba(108,92,231,1)',
+                borderWidth: 1,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { color: '#8b8fa8', stepSize: 1 }, grid: { color: 'rgba(46,51,71,0.5)' } },
+                x: { ticks: { color: '#8b8fa8' }, grid: { display: false } }
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

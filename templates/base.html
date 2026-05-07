@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CadastroPro{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand"><i class="fas fa-users"></i> CadastroPro</a>
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            <a href="/" class="nav-link"><i class="fas fa-list"></i> Listar</a>
+            <a href="/exportar/csv" class="nav-link"><i class="fas fa-file-export"></i> Exportar</a>
+            <a href="/cadastrar" class="nav-link btn-nav"><i class="fas fa-plus"></i> Novo</a>
+        </div>
+    </nav>
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-triangle' }}"></i>
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="footer"><p>&copy; 2026 CadastroPro</p></footer>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
