@@ -234,10 +234,9 @@ Desenvolvido com dedicação por **Pedro Dorelande** para o **Hackathon JUCI 202
 
 ---
 
-> **P.S.:** Professor **Abraão Henrique**, o senhor é uma pessoa muito legal e um excelente professor! Obrigado por todo o apoio, incentivo e por acreditar no potencial dos seus alunos. O senhor faz a diferença! 🙏🎓
-
+> **P.S.:** Professor **Abraão Henrique**, o senhor é uma pessoa muito legal 
 ---
 
 <p align="center">
-  Feito com ❤️ em Python
+  Feito em Python
 </p>
