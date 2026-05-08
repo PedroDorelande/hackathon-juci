@@ -200,7 +200,7 @@ def editar(id):
     return render_template('form.html', pessoa=pessoa, acao='Editar')
 
 
-@app.route('/excluir/<int:id>', methods=['POST'])
+@app.route('/excluir/<int:id>', methods=['GET', 'POST'])
 def excluir(id):
     conn = get_db()
     conn.execute('DELETE FROM pessoas WHERE id = ?', (id,))

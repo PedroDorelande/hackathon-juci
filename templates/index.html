@@ -43,8 +43,8 @@
                 <td class="actions">
                     <a href="/visualizar/{{ p.id }}" class="btn btn-icon" title="Ver"><i class="fas fa-eye"></i></a>
                     <a href="/editar/{{ p.id }}" class="btn btn-icon btn-edit" title="Editar"><i class="fas fa-pen"></i></a>
-                    <form action="/excluir/{{ p.id }}" method="POST" style="display:inline" onsubmit="return confirm('Excluir {{ p.nome }}?')">
-                        <button class="btn btn-icon btn-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                    <form action="/excluir/{{ p.id }}" method="POST" style="display:inline" onsubmit="return confirm('Deseja excluir este cadastro?');">
+                        <button type="submit" class="btn btn-icon btn-delete" title="Excluir"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
